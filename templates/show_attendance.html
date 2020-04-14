@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<form class="card mb-4" method="POST" action="#">
+    {% csrf_token %}
+    <div class="card-header"><i class="fas fa-table mr-1"></i>
+        Showing Attendances for subject <b>{{ subject }}  ({{ teacher }})</b>
+        for <b>{{ dept }}</b>
+        at <b> {{ date  }} </b>
+    </div>
+<!--    <div class="row" >-->
+<!--            <div class="col-sm-4">-->
+<!--                <div class="form-group">-->
+<!--                    <input class="btn btn-primary" type="submit" value="Show">-->
+<!--                    <input class="btn btn-primary" type="submit" value="Download">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--    </div>-->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Roll No</th>
+                                <th>Name</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for At in Ats %}
+                            <tr>
+                                <td>{{  At.Student  }}</td>
+                                <td>{{  At.Student.name  }}</td>
+                                <td>{{  At.attendance_time }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <input type="hidden" name="teacher" value="{{ teacher }}">
+                    <input type="hidden" name="subject" value="{{ subject }}">
+                    <input type="hidden" name="dept" value="{{ dept }}">
+                </div>
+            </div>
+        </div>
+</form>
+
+
+{% endblock %}

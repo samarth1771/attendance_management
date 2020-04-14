@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% if filled == True %}
+<div>
+    <label class="col-lg-3 col-form-label form-control-label"><b>Attendance Filled Successfully.</b></label>
+</div>
+{% else %}
+<form class="card mb-4" method="POST" action="{% url 'fill_attendance' %}">
+    {% csrf_token %}
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Fill Attendance for subject <b>{{ subject }}</b> and teacher <b>{{ teacher }}</b> for <b>{{ dept }}</b></div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Roll No</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>RFID No</th>
+                                <th>Present?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in filtered_std %}
+                            <tr>
+                                <td>{{  s.er_no  }}</td>
+                                <td>{{  s.name  }}</td>
+                                <td>{{  s.gender  }}</td>
+                                <td>{{ s.rfid_no }}</td>
+                                <td><input type="checkbox" value="{{ s.er_no }}" name="attendance" style="text-align:center; vertical-align: middle;"></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <input type="hidden" name="teacher" value="{{ teacher }}">
+                    <input type="hidden" name="subject" value="{{ subject }}">
+                    <input type="hidden" name="dept" value="{{ dept }}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-9">
+                    <input type="submit" class="btn btn-primary" value="Fill Attendances" id="submit" />
+                </div>
+            </div>
+        </div>
+</form>
+{% endif %}
+
+{% endblock %}

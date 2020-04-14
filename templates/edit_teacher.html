@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="container">
+        <!-- edit form column -->
+        <div class="col-lg-12 text-lg-center">
+            <h2>Edit Student</h2>
+            <br>
+            <br>
+        </div>
+            <div class="col-lg-8 push-lg-4 personal-info">
+                 <form role="form" action="#" method="POST">
+                     {% csrf_token %}
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="name" value="{{ teacher.name }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Teacher ID</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="tid" value="{{ teacher.teacher_id }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Department</label>
+                            <div class="col-lg-9">
+                                <select class="form-control" id="dept" name="dept">
+                                    {% for dept in std_dept %}
+                                        <option value="{{ dept }}">{{ dept }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Subject</label>
+                        <div class="col-lg-9">
+                            <select multiple="multiple"  name="subjects" size="5">
+                                    {% for s in subs %}
+                                        <option value="{{ s.sub_code }}">{{ s.name }}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                        <div class="col-lg-9">
+                            <input type="reset" class="btn btn-secondary" value="Cancel" />
+                            <input type="submit" class="btn btn-primary" value="Save Changes" id="submit" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% if updated == True %}
+            <div>
+                <label class="col-lg-3 col-form-label form-control-label"><b>Details Edited Successfully.</b></label>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

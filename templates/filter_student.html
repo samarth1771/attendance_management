@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!--{% if filtered == False %}-->
+<div class="container-fluid">
+    <form action="{% url 'view_student' %}" method="POST">
+        {% csrf_token %}
+         <div class="row">
+                <div class="col-sm-4" >
+                    <div class="form-group" >
+                        <label class="label label-default" for="sem_id" >Semester</label>
+                        <select class="form-control align-center" id="sem_id" name="sem">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+                </div>
+         </div>
+         <div class="row" >
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label label-default" for="dept_id">Department</label>
+                        <select class="form-control" id="dept_id" name="dept">
+                        {% for dept in std_dept %}
+                        <option value="{{ dept }}">{{ dept }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                </div>
+         </div>
+         <div class="row" >
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" id="update" value="Search">
+                </div>
+            </div>
+         </div>
+    </form>
+</div>
+<!--{% endif %}-->
+{% if filtered == True %}
+
+<div class="row" >
+    <div class="col-sm-12">
+        <div class="form-group">
+
+            <table class="table table-dark table-striped ">
+                <thead>
+                    <tr>
+                        <th>Roll No</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>RFID No</th>
+                        <th>Update/Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in filtered_std %}
+                    <tr>
+                        <td>{{  s.er_no  }}</td>
+                        <td>{{  s.name  }}</td>
+                        <td>{{  s.gender  }}</td>
+                        <td>{{ s.rfid_no }}</td>
+                        <td><a href="#">Edit</a> </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+{% endif %}
+
+{% endblock %}

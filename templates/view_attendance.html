@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <form action="#" method="POST">
+        {% csrf_token %}
+         <div class="row">
+                <div class="col-sm-4" >
+                    <div class="form-group" >
+                        <label class="label label-default" for="sem_id" >Semester</label>
+                        <select class="form-control align-center" id="sem_id" name="sem">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+                </div>
+         </div>
+         <div class="row" >
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label label-default" for="dept_id">Department</label>
+                        <select class="form-control" id="dept_id" name="dept">
+                        {% for dept in std_dept %}
+                        <option value="{{ dept }}">{{ dept }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                </div>
+         </div>
+        <div class="row" >
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label label-default">Subject</label>
+                        <select name="subject" class="form-control" >
+                        {% for s in subs %}
+                            <option value="{{ s.name }}">{{ s.name }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                </div>
+         </div>
+        <div class="row" >
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label label-default" >Teacher</label>
+                        <select name="teacher" class="form-control">
+                        {% for t in teachers %}
+                            <option value="{{ t.name }}">{{ t.name }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                </div>
+         </div>
+        <div class="row" >
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="label label-default" >Date</label>
+                        <input type="date" name="date" class="form-control">
+                    </div>
+                </div>
+         </div>
+         <div class="row" >
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="Show" name="show">
+                    <input class="btn btn-primary" type="submit" value="Download" name="download">
+                </div>
+            </div>
+         </div>
+    </form>
+</div>
+
+{% endblock %}
